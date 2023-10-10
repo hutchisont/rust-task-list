@@ -25,6 +25,7 @@ fn main() {
     let mut handler = task_handler::TaskHandler::new();
 
     'main: loop {
+        print_menu();
         let choice = get_next_command();
         let command = match choice {
             None => {
@@ -45,7 +46,7 @@ fn main() {
 }
 
 
-fn display_menu() {
+fn print_menu() {
     println!("\nMenu:");
     println!("1. Add a task");
     println!("2. Mark a task as complete");
@@ -54,32 +55,33 @@ fn display_menu() {
 }
 
 fn get_next_command() -> Option<Command> {
-    display_menu();
-    print!("Please enter your choice: ");
-    std::io::stdout().flush().ok();
+    let prompt = "Please enter your choice: ";
+    let choice = prompt_get_value(prompt);
 
-    let mut choice = String::new();
-    std::io::stdin().read_line(&mut choice).expect("Failed to read input");
-    return Command::from_str(&choice.trim());
+    return Command::from_str(&choice);
 }
 
-    print!("Enter the index of the task to mark as complete: ");
-    std::io::stdout().flush().ok();
-
-    let mut index = String::new();
-    std::io::stdin().read_line(&mut index).expect("Failed to read input");
-    let index: usize = index.trim().parse().expect("Failed to convert to int");
 fn handle_completed_task(handler: &mut task_handler::TaskHandler) {
+    let prompt = "Enter the index of the task to mark as complete: ";
+    let index = prompt_get_value(prompt);
+    let index: usize = index.parse().expect("Failed to convert to int");
 
     handler.mark_task_completed(index);
 }
 
-    print!("Enter task description: ");
 fn handle_add_task(handler: &mut task_handler::TaskHandler) {
+    let prompt = "Enter task description: ";
+    let description = prompt_get_value(prompt);
+
+    handler.add_task(&description);
+}
+
+fn prompt_get_value(prompt: &str) -> String {
+    print!("{}", prompt);
     std::io::stdout().flush().ok();
 
-    let mut description = String::new();
-    std::io::stdin().read_line(&mut description).expect("Failed to read input");
+    let mut line = String::new();
+    std::io::stdin().read_line(&mut line).expect("Failed to read input");
 
-    handler.add_task(&description.trim());
+    return line.trim().to_string();
 }
