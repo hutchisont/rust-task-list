@@ -58,14 +58,14 @@ impl TaskHandler {
         }
     }
 
-    pub fn add_task(&mut self, description: &str) {
+    pub fn add_task(&mut self, description: &str) -> String {
         let task = Task {
             status: Status::NotCompleted,
             description: String::from(description),
         };
         self.tasks.push(task);
 
-        println!("\nTask \"{description}\" added.");
+        return format!("\nTask \"{description}\" added.");
     }
 }
 

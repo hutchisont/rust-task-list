@@ -74,7 +74,8 @@ fn handle_add_task(handler: &mut TaskHandler) {
     let prompt = "Enter task description: ";
     let description = prompt_get_value(prompt);
 
-    handler.add_task(&description);
+    let output = handler.add_task(&description);
+    println!("{}", output);
 }
 
 fn prompt_get_value(prompt: &str) -> String {
