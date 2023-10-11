@@ -1,6 +1,7 @@
-use std::io::Write;
-
 mod task_handler;
+
+use std::io::Write;
+use task_handler::TaskHandler;
 
 enum Command {
     Add,
@@ -22,7 +23,7 @@ impl Command {
 }
 
 fn main() {
-    let mut handler = task_handler::TaskHandler::new();
+    let mut handler = TaskHandler::new();
 
     'main: loop {
         print_menu();
@@ -61,7 +62,7 @@ fn get_next_command() -> Option<Command> {
     return Command::from_str(&choice);
 }
 
-fn handle_completed_task(handler: &mut task_handler::TaskHandler) {
+fn handle_completed_task(handler: &mut TaskHandler) {
     let prompt = "Enter the index of the task to mark as complete: ";
     let index = prompt_get_value(prompt);
     let index: usize = index.parse().expect("Failed to convert to int");
@@ -69,7 +70,7 @@ fn handle_completed_task(handler: &mut task_handler::TaskHandler) {
     handler.mark_task_completed(index);
 }
 
-fn handle_add_task(handler: &mut task_handler::TaskHandler) {
+fn handle_add_task(handler: &mut TaskHandler) {
     let prompt = "Enter task description: ";
     let description = prompt_get_value(prompt);
 
