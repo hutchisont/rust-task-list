@@ -38,7 +38,7 @@ fn main() {
         match command {
             Command::Add => handle_add_task(&mut handler),
             Command::MarkCompleted => handle_completed_task(&mut handler),
-            Command::View => handler.print_tasks(),
+            Command::View => handle_view_tasks(&handler),
             Command::Quit => break 'main
         }
     }
@@ -75,6 +75,11 @@ fn handle_add_task(handler: &mut TaskHandler) {
     let description = prompt_get_value(prompt);
 
     let output = handler.add_task(&description);
+    println!("{}", output);
+}
+
+fn handle_view_tasks(handler: &TaskHandler) {
+    let output = handler.view_tasks();
     println!("{}", output);
 }
 

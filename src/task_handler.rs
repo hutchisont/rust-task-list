@@ -36,15 +36,17 @@ impl TaskHandler {
         };
     }
 
-    pub fn print_tasks(&self) {
+    pub fn view_tasks(&self) -> String {
+        let mut output;
         if self.tasks.len() == 0 {
-            println!("No tasks to view.")
+            output = String::from("No tasks to view.")
         } else {
-            println!("Tasks:");
+            output = String::from("Tasks:");
             for (index, task) in self.tasks.iter().enumerate() {
-                println!("{}. {}", index + 1, task);
+                output = format!("{}\n{}. {}", output, index + 1, task);
             }
         }
+        return output;
     }
 
     pub fn mark_task_completed(&mut self, index: usize) {
