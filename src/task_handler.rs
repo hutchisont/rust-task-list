@@ -1,13 +1,15 @@
+use std::fmt::Formatter;
+
 enum Status {
     Completed,
     NotCompleted,
 }
 
-impl Status {
-    fn to_str(&self) -> &str {
+impl std::fmt::Display for Status {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            Status::Completed => "X",
-            Status::NotCompleted => " ",
+            Status::Completed => write!(f, "[X]"),
+            Status::NotCompleted => write!(f, "[ ]"),
         }
     }
 }
@@ -15,6 +17,12 @@ impl Status {
 struct Task {
     status: Status,
     description: String,
+}
+
+impl std::fmt::Display for Task {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} {}", self.status, self.description)
+    }
 }
 
 pub struct TaskHandler {
@@ -34,7 +42,7 @@ impl TaskHandler {
         } else {
             println!("Tasks:");
             for (index, task) in self.tasks.iter().enumerate() {
-                println!("{}. [{}] {}", index + 1, task.status.to_str(), task.description);
+                println!("{}. {}", index + 1, task);
             }
         }
     }
