@@ -67,7 +67,8 @@ fn handle_completed_task(handler: &mut TaskHandler) {
     let index = prompt_get_value(prompt);
     let index: usize = index.parse().expect("Failed to convert to int");
 
-    handler.mark_task_completed(index);
+    let output = handler.mark_task_completed(index);
+    println!("\n{}", output);
 }
 
 fn handle_add_task(handler: &mut TaskHandler) {

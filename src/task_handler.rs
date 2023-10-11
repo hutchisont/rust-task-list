@@ -49,14 +49,13 @@ impl TaskHandler {
         return output;
     }
 
-    pub fn mark_task_completed(&mut self, index: usize) {
-        println!();
+    pub fn mark_task_completed(&mut self, index: usize) -> String {
         let internal_index = index - 1;
         if self.tasks.len() >= internal_index {
             self.tasks[internal_index].status = Status::Completed;
-            println!("Task \"{}\" marked as complete.", self.tasks[internal_index].description);
+            return format!("Task \"{}\" marked as complete.", self.tasks[internal_index].description);
         } else {
-            println!("Failed to update task, invalid index");
+            return format!("Failed to update task, invalid index");
         }
     }
 
