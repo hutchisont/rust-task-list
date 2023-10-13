@@ -1,5 +1,6 @@
 use std::fmt::Formatter;
 
+#[derive(Debug, PartialEq)]
 enum Status {
     Completed,
     NotCompleted,
@@ -70,3 +71,40 @@ impl TaskHandler {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use crate::task_handler::{Status, TaskHandler};
+
+    #[test]
+    fn when_task_added_collection_has_one_additional_task() {
+        let mut handler = TaskHandler::new();
+
+        assert!(handler.tasks.is_empty());
+
+        handler.add_task("test_task");
+
+        assert_eq!(1, handler.tasks.len());
+    }
+
+    #[test]
+    fn when_task_marked_as_completed_task_status_is_set_to_completed() {
+        let mut handler = TaskHandler::new();
+        handler.add_task("test_task");
+
+        assert_eq!(Status::NotCompleted, handler.tasks[0].status);
+
+        handler.mark_task_completed(1);
+
+        assert_eq!(Status::Completed, handler.tasks[0].status);
+    }
+
+    #[test]
+    fn when_mark_ask_completed_given_invalid_index_handler_returns_error_message() {
+        let mut handler = TaskHandler::new();
+
+        let expected_error = "Failed to update task, invalid index";
+        let error = handler.mark_task_completed(0);
+
+        assert_eq!(error, expected_error);
+    }
+}
