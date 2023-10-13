@@ -59,7 +59,7 @@ fn get_next_command() -> Option<Command> {
     let prompt = "Please enter your choice: ";
     let choice = prompt_get_value(prompt);
 
-    return Command::from_str(&choice);
+    Command::from_str(&choice)
 }
 
 fn handle_completed_task(handler: &mut TaskHandler) {
@@ -91,5 +91,5 @@ fn prompt_get_value(prompt: &str) -> String {
     let mut line = String::new();
     std::io::stdin().read_line(&mut line).expect("Failed to read input");
 
-    return line.trim().to_string();
+    line.trim().to_string()
 }

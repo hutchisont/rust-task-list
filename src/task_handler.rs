@@ -31,9 +31,9 @@ pub struct TaskHandler {
 
 impl TaskHandler {
     pub fn new() -> TaskHandler {
-        return TaskHandler {
+        TaskHandler {
             tasks: Vec::new(),
-        };
+        }
     }
 
     pub fn view_tasks(&self) -> String {
@@ -46,16 +46,16 @@ impl TaskHandler {
                 output = format!("{}\n{}. {}", output, index + 1, task);
             }
         }
-        return output;
+        output
     }
 
     pub fn mark_task_completed(&mut self, index: usize) -> String {
         let internal_index = index - 1;
         if self.tasks.len() >= internal_index {
             self.tasks[internal_index].status = Status::Completed;
-            return format!("Task \"{}\" marked as complete.", self.tasks[internal_index].description);
+            format!("Task \"{}\" marked as complete.", self.tasks[internal_index].description)
         } else {
-            return format!("Failed to update task, invalid index");
+            format!("Failed to update task, invalid index")
         }
     }
 
@@ -66,7 +66,7 @@ impl TaskHandler {
         };
         self.tasks.push(task);
 
-        return format!("\nTask \"{description}\" added.");
+        format!("\nTask \"{description}\" added.")
     }
 }
 
