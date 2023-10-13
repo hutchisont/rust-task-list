@@ -1,4 +1,8 @@
-**Basic Rust Programming Assignment**
+# Rust Task List  
+Initially started off as the below "Programming Assignment", which was generated from chatGPT just to give me an idea to start with.
+I've since started expanding beyond the assignment so don't treat what the assignment mentions as the full list of features.
+
+## Basic Rust Programming Assignment
 
 **Objective**
 
