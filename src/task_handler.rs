@@ -38,7 +38,7 @@ impl TaskHandler {
 
     pub fn view_tasks(&self) -> String {
         let mut output;
-        if self.tasks.len() == 0 {
+        if self.tasks.is_empty() {
             output = String::from("No tasks to view.")
         } else {
             output = String::from("Tasks:");
@@ -55,7 +55,7 @@ impl TaskHandler {
             self.tasks[internal_index].status = Status::Completed;
             format!("Task \"{}\" marked as complete.", self.tasks[internal_index].description)
         } else {
-            format!("Failed to update task, invalid index")
+            "Failed to update task, invalid index".to_string()
         }
     }
 
